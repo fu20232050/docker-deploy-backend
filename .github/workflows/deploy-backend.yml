@@ -37,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: 20232089/234-deploylab-backend:latest
+          tags: ful4864654/234-deploylab-backend:latest
 
       - name: Copy docker-compose.yml via SSH
         uses: appleboy/scp-action@v0.1.7
@@ -58,7 +58,7 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/backend
-            echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+            echo ${{ dckr_pat_RL86syu7JEd4kqSb0puYvgjrtds }} | docker login --username ${{ ful4864654 }} --password-stdin
             docker compose down
             docker compose pull
             docker compose up -d
