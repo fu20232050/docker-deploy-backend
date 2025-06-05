@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  backend:
+    image: ful4864654/234-deploylab-backend:latest
+    # noinspection ComposeUnknownKeys
+    pull_policy: always
+    ports:
+      - "8085:8080"
