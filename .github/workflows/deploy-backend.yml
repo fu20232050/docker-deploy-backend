@@ -2,7 +2,6 @@ name: Deploy backend to host
 on:
   push:
     branches: [main]
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -38,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/234-deploylab-backend:latest # <--- 使用 secrets 动态构建标签
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/234-deploylab-backend:latest
 
       - name: Copy docker-compose.yml via SSH
         uses: appleboy/scp-action@v0.1.7
@@ -59,8 +58,8 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/backend
-            echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+            echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
             docker compose down
             docker compose pull
             docker compose up -d
-            # rm -rf /home/ubuntu/backend # <--- 考虑是否真的需要这条命令
+            rm -rf /home/ubuntu/backend
